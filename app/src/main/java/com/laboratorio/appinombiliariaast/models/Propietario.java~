@@ -1,0 +1,4 @@
+package com.laboratorio.appinombiliariaast.models;
+
+public class Propietario {
+}
