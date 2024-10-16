@@ -9,37 +9,29 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.laboratorio.appinombiliariaast.MainActivity;
 import com.laboratorio.appinombiliariaast.R;
+
 import com.laboratorio.appinombiliariaast.databinding.ActivityLoginBinding;
-import com.laboratorio.appinombiliariaast.databinding.ActivityMainBinding;
 
 public class LoginActivity extends AppCompatActivity {
     private ActivityLoginBinding binding;
+    private LoginViewModel vm;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        vm = ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication()).create(LoginViewModel.class);
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         binding.btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String email = binding.etEmail.getText().toString().trim();
-                String password = binding.etPassword.getText().toString().trim();
-
-                if (email.isEmpty() || password.isEmpty()) {
-                    Intent intent = new Intent(LoginActivity.this,  MainActivity.class);
-                    startActivity(intent);
-                    finish();
-                }else{
-                    Toast.makeText(LoginActivity.this, "Error de inicio de sesion", Toast.LENGTH_SHORT).show();
-                }
+                vm.callLogin(binding.etEmail.getText().toString(), binding.etPassword.getText().toString());
             }
         });
-
-
     }
 }
 
