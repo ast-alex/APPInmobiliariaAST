@@ -13,9 +13,9 @@
             android:icon="@drawable/ic_my_profile"
             android:title="Mi Perfil" />
         <item
-            android:id="@+id/nav_gallery"
+            android:id="@+id/nav_cambiarpass"
             android:icon="@drawable/ic_inmuebles"
-            android:title="@string/menu_gallery" />
+            android:title="Cambiar Password" />
         <item
             android:id="@+id/nav_slideshow"
             android:icon="@drawable/ic_menu_slideshow"

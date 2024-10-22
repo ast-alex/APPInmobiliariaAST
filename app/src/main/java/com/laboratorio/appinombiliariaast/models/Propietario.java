@@ -1,77 +1,80 @@
 package com.laboratorio.appinombiliariaast.models;
 
 public class Propietario {
-    private int DNI;
-    private String Nombre;
-    private String Apellido;
-    private String Telefono;
-    private String Email;
-    private String Direccion;
-    private String Password;
+    private String dni;
+    private String nombre;
+    private String apellido;
+    private String telefono;
+    private String email;
+    private String direccion;
+    private String avatar;
 
-    public Propietario(int DNI, String nombre, String apellido, String telefono, String email, String direccion, String password) {
-        this.DNI = DNI;
-        Nombre = nombre;
-        Apellido = apellido;
-        Telefono = telefono;
-        Email = email;
-        Direccion = direccion;
-        Password = password;
+    public Propietario() {
     }
 
-    public int getDNI() {
-        return DNI;
+    public Propietario(String dni, String nombre, String apellido, String telefono, String email, String direccion, String avatar) {
+        this.dni = dni;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.telefono = telefono;
+        this.email = email;
+        this.direccion = direccion;
+        this.avatar = avatar;
     }
 
-    public void setDNI(int DNI) {
-        this.DNI = DNI;
+    public String getDni() {
+        return dni;
+    }
+
+    public void setDni(String dni) {
+        this.dni = dni;
     }
 
     public String getNombre() {
-        return Nombre;
+        return nombre;
     }
 
     public void setNombre(String nombre) {
-        Nombre = nombre;
-    }
-
-    public String getApellido() {
-        return Apellido;
-    }
-
-    public void setApellido(String apellido) {
-        Apellido = apellido;
+        this.nombre = nombre;
     }
 
     public String getTelefono() {
-        return Telefono;
+        return telefono;
     }
 
     public void setTelefono(String telefono) {
-        Telefono = telefono;
+        this.telefono = telefono;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
     }
 
     public String getEmail() {
-        return Email;
+        return email;
     }
 
     public void setEmail(String email) {
-        Email = email;
+        this.email = email;
     }
 
     public String getDireccion() {
-        return Direccion;
+        return direccion;
     }
 
     public void setDireccion(String direccion) {
-        Direccion = direccion;
+        this.direccion = direccion;
     }
 
-    public String getPassword() {
-        return Password;
+    public String getAvatar() {
+        return avatar;
     }
 
-    public void setPassword(String password) {
-        Password = password;
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 }

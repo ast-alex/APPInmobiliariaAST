@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.laboratorio.appinombiliariaast.models.Login;
+import com.laboratorio.appinombiliariaast.models.Pass;
 import com.laboratorio.appinombiliariaast.models.Propietario;
 
 import retrofit2.Call;
@@ -16,6 +17,8 @@ import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
+import retrofit2.http.Part;
 
 public class ApiClient {
 
@@ -59,6 +62,12 @@ public class ApiClient {
         @GET("Propietario/perfil")
         Call<Propietario> getMPropietario(@Header("Authorization") String token);
 
+
+        @PUT("Propietario/modificar")
+        Call<Propietario> modificarPropietario(@Header("Authorization") String token, @Body Propietario propietario);
+
+        @PUT("Propietario/cambiar-password")
+        Call<String> cambiarPassword(@Header("Authorization") String token, @Body Pass pass);
     }
 
 
