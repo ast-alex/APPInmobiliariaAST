@@ -28,7 +28,7 @@
     <fragment
         android:id="@+id/nav_inmueble"
         android:name="com.laboratorio.appinombiliariaast.ui.inmueble.InmuebleFragment"
-        android:label="Mis Inmuebles"
+        android:label="fragment_inmueble"
         tools:layout="@layout/fragment_inmueble" />
 
 </navigation>

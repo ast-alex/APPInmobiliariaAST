@@ -5,9 +5,13 @@ import android.content.SharedPreferences;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.laboratorio.appinombiliariaast.models.Inmueble;
 import com.laboratorio.appinombiliariaast.models.Login;
 import com.laboratorio.appinombiliariaast.models.Pass;
 import com.laboratorio.appinombiliariaast.models.Propietario;
+import com.laboratorio.appinombiliariaast.models.ResetPasswordViewModel;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Retrofit;
@@ -19,6 +23,7 @@ import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Part;
+import retrofit2.http.Query;
 
 public class ApiClient {
 
@@ -68,6 +73,20 @@ public class ApiClient {
 
         @PUT("Propietario/cambiar-password")
         Call<String> cambiarPassword(@Header("Authorization") String token, @Body Pass pass);
+
+        @POST("Propietario/forgot-password")
+        Call<String> forgotPassword(@Body String email);
+
+        @POST("Propietario/reset-password")
+        Call<String> resetPassword(
+                @Query("email") String email,
+                @Query("token") String token,
+                @Body ResetPasswordViewModel model
+        );
+
+        @GET("Inmueble/inmueblespropietario")
+        Call<List<Inmueble>> getInmuebles(@Header("Authorization") String token);
+
     }
 
 

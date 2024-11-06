@@ -50,7 +50,6 @@ dependencies {
     implementation(libs.converter.scalars)
     implementation(libs.glide)
     implementation(libs.legacy.support.v4)
-    implementation(libs.activity)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)

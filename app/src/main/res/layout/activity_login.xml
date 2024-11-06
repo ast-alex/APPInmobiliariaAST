@@ -59,6 +59,19 @@
             android:textSize="20dp"
             android:layout_marginTop="32dp"/>
 
+        <Button
+            android:id="@+id/btnForgotPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Olvide mi contraseña"
+            android:backgroundTint="@color/white"
+            android:textColor="#3B84F1"
+            android:padding="12dp"
+            android:textSize="16dp"
+            android:layout_marginTop="32dp"/>
+
+
+
     </LinearLayout>
 </RelativeLayout>
 

@@ -23,7 +23,7 @@
                 <category android:name="android.intent.category.BROWSABLE"/>
                 <data
                     android:scheme="http"
-                    android:host="192.168.1.2"
+                    android:host="tudominio.com"
                     android:pathPrefix="/reset-password"/>
             </intent-filter>
         </activity>

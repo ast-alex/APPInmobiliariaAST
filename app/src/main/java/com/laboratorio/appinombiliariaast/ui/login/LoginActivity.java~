@@ -16,7 +16,6 @@ import com.laboratorio.appinombiliariaast.MainActivity;
 import com.laboratorio.appinombiliariaast.R;
 
 import com.laboratorio.appinombiliariaast.databinding.ActivityLoginBinding;
-import com.laboratorio.appinombiliariaast.ui.forgotpassword.ForgotPasswordActivity;
 
 public class LoginActivity extends AppCompatActivity {
     private ActivityLoginBinding binding;
@@ -32,14 +31,6 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 vm.callLogin(binding.etEmail.getText().toString(), binding.etPassword.getText().toString());
-            }
-        });
-
-        binding.btnForgotPassword.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(LoginActivity.this, ForgotPasswordActivity.class);
-                startActivity(intent);
             }
         });
     }
