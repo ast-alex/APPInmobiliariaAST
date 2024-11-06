@@ -53,6 +53,40 @@ public class DetalleInmuebleViewModel extends AndroidViewModel {
 
                 @Override
                 public void onFailure(Call<InmuebleDetalleViewModel> call, Throwable throwable) {
+                    Log.d("DetalleInmuebleViewModel", "Error en la peticion: " + throwable.getMessage());
+                    Toast.makeText(getApplication(), " Error en el server", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+    }
+
+    public void actualizarDisponibilidad(int inmuebleId, boolean disponible) {
+        SharedPreferences sp = getApplication().getSharedPreferences("usuario", 0);
+        String token = sp.getString("token", null);
+
+        if (token != null) {
+            ApiClient.InmobiliariaService api = ApiClient.getInmobiliariaService();
+            Call<Void> pcall = api.actualizarDisponibilidad(inmuebleId, disponible, "Bearer " + token);
+
+            pcall.enqueue(new Callback<Void>() {
+                @Override
+                public void onResponse(Call<Void> call, Response<Void> response) {
+                    if(response.isSuccessful()) {
+                        InmuebleDetalleViewModel idvm = inmuebleDetalle.getValue();
+                        if(idvm != null) {
+                            idvm.setDisponibilidad(disponible);
+                            inmuebleDetalle.postValue(idvm);
+                        }
+                        Toast.makeText(getApplication(), "Disponibilidad actualizada", Toast.LENGTH_SHORT).show();
+                    }else{
+                        Toast.makeText(getApplication(), "Error al cambiar la disponibilidad", Toast.LENGTH_SHORT).show();
+                    }
+
+                }
+
+                @Override
+                public void onFailure(Call<Void> call, Throwable throwable) {
+                    Log.d("InmuebleViewModel", "Error en la peticion: " + throwable.getMessage());
                     Toast.makeText(getApplication(), " Error en el server", Toast.LENGTH_SHORT).show();
                 }
             });

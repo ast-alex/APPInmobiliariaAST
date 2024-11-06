@@ -12,6 +12,8 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -47,7 +49,7 @@ public class DetalleInmuebleFragment extends Fragment {
                         binding.tvUso.setText("Uso: " + inmuebleDetalleViewModel.getUso());
                         binding.tvTipo.setText("Tipo: " + inmuebleDetalleViewModel.getTipo());
                         binding.tvAmbientes.setText("Cantidad de Ambientes: " + inmuebleDetalleViewModel.getCantidad_Ambientes());
-                        binding.tvPrecio.setText("Precio: " + inmuebleDetalleViewModel.getPrecio());
+                        binding.tvPrecio.setText("Precio: $" + inmuebleDetalleViewModel.getPrecio());
                         binding.tvDisponibilidad.setText("Disponibilidad: " + (inmuebleDetalleViewModel.isDisponibilidad() ? "Disponible" : "No disponible"));
                         binding.tvLatitud.setText("Latitud: " + inmuebleDetalleViewModel.getLatitud());
                         binding.tvLongitud.setText("Longitud: " + inmuebleDetalleViewModel.getLongitud());
@@ -60,6 +62,19 @@ public class DetalleInmuebleFragment extends Fragment {
                                 .error(R.drawable.ic_launcher_foreground)
                                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                                 .into(binding.ivFoto);
+
+
+                        // Desactivar temporalmente el listener
+                        binding.cbDisponibilidad.setOnCheckedChangeListener(null);
+                        binding.cbDisponibilidad.setChecked(inmuebleDetalleViewModel.isDisponibilidad());
+
+                        // Volver a activar el listener después de configurar el estado inicial
+                        binding.cbDisponibilidad.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                            @Override
+                            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                                detalleInmuebleViewModel.actualizarDisponibilidad(inmuebleId, isChecked);
+                            }
+                        });
                     }
                 });
 

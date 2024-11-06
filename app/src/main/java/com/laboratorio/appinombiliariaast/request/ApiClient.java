@@ -21,6 +21,8 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
+import retrofit2.http.Headers;
+import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Part;
@@ -92,6 +94,9 @@ public class ApiClient {
         @GET("Inmueble/detalle/{id}")
         Call<InmuebleDetalleViewModel> getDetalleInmueble(@Path("id") int id, @Header("Authorization") String token);
 
+        @Headers({"Content-Type: application/json"})
+        @PATCH("Inmueble/disponibilidad/{id}")
+        Call<Void> actualizarDisponibilidad(@Path("id") int id, @Body boolean disponibilidad, @Header("Authorization") String token);
     }
 
 

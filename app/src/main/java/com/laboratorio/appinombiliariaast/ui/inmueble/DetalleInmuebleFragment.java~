@@ -12,6 +12,8 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -52,14 +54,27 @@ public class DetalleInmuebleFragment extends Fragment {
                         binding.tvLatitud.setText("Latitud: " + inmuebleDetalleViewModel.getLatitud());
                         binding.tvLongitud.setText("Longitud: " + inmuebleDetalleViewModel.getLongitud());
                         String baseUrl = "http://192.168.1.2:5166";
-                        String avatarPath = inmuebleDetalleViewModel.getFoto();
-                        String avatarUrl = baseUrl + avatarPath;
+                        String FotoPath = inmuebleDetalleViewModel.getFoto();
+                        String FotoUrl = baseUrl + FotoPath;
                         Glide.with(requireContext())
-                                .load(avatarUrl)
+                                .load(FotoUrl)
                                 .placeholder(R.drawable.loading_plc)
                                 .error(R.drawable.ic_launcher_foreground)
                                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                                 .into(binding.ivFoto);
+
+
+                        // Desactivar temporalmente el listener
+                        binding.cbDisponibilidad.setOnCheckedChangeListener(null);
+                        binding.cbDisponibilidad.setChecked(inmuebleDetalleViewModel.isDisponibilidad());
+
+                        // Volver a activar el listener después de configurar el estado inicial
+                        binding.cbDisponibilidad.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                            @Override
+                            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                                detalleInmuebleViewModel.actualizarDisponibilidad(inmuebleId, isChecked);
+                            }
+                        });
                     }
                 });
 
