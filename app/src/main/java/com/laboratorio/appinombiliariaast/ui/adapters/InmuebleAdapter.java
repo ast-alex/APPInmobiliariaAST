@@ -28,9 +28,11 @@ public class InmuebleAdapter extends RecyclerView.Adapter<InmuebleAdapter.Inmueb
 
     private List<Inmueble> inmueblesList;
     private Context context;
+    private OnItemClickListener onItemClickListener;  // Listener para manejar el clic
 
-    public InmuebleAdapter(Context context) {
+    public InmuebleAdapter(Context context, OnItemClickListener onItemClickListener) {
         this.context = context;
+        this.onItemClickListener = onItemClickListener;
     }
 
     public void setInmueblesList(List<Inmueble> inmueblesList ) {
@@ -82,7 +84,6 @@ public class InmuebleAdapter extends RecyclerView.Adapter<InmuebleAdapter.Inmueb
         return (inmueblesList != null) ? inmueblesList.size() : 0;
     }
 
-
     public class InmuebleViewHolder extends RecyclerView.ViewHolder {
         TextView tvDireccion, tvPrecio;
         ImageView ivInmueble;
@@ -92,6 +93,18 @@ public class InmuebleAdapter extends RecyclerView.Adapter<InmuebleAdapter.Inmueb
             tvDireccion = itemView.findViewById(R.id.tvDireccion);
             tvPrecio = itemView.findViewById(R.id.tvPrecio);
             ivInmueble = itemView.findViewById(R.id.ivInmueble);
+
+            // Aquí escuchamos el clic en el ítem
+            itemView.setOnClickListener(v -> {
+                int inmuebleId = inmueblesList.get(getAdapterPosition()).getiD_inmueble();
+                onItemClickListener.onItemClick(inmuebleId);
+            });
         }
     }
+
+    // Interface personalizada para manejar el clic
+    public interface OnItemClickListener {
+        void onItemClick(int inmuebleId);
+    }
 }
+

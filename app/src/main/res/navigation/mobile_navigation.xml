@@ -30,5 +30,10 @@
         android:name="com.laboratorio.appinombiliariaast.ui.inmueble.InmuebleFragment"
         android:label="Mis Inmuebles"
         tools:layout="@layout/fragment_inmueble" />
+    <fragment
+        android:id="@+id/detalleFragment"
+        android:name="com.laboratorio.appinombiliariaast.ui.inmueble.DetalleInmuebleFragment"
+        android:label="Inmueble Detalles"
+        tools:layout="@layout/fragment_detalle_inmueble" />
 
 </navigation>

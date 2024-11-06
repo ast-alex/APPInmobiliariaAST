@@ -3,8 +3,8 @@ package com.laboratorio.appinombiliariaast.models;
 public class InmuebleDetalleViewModel {
     private int iD_inmueble;
     private String direccion;
-    private String uso;
-    private String tipo;
+    private int uso;
+    private int tipo;
     private int cantidad_Ambientes;
     private Double latitud;
     private Double longitud;
@@ -31,19 +31,19 @@ public class InmuebleDetalleViewModel {
         this.iD_inmueble = iD_inmueble;
     }
 
-    public String getUso() {
+    public int getUso() {
         return uso;
     }
 
-    public void setUso(String uso) {
+    public void setUso(int uso) {
         this.uso = uso;
     }
 
-    public String getTipo() {
+    public int getTipo() {
         return tipo;
     }
 
-    public void setTipo(String tipo) {
+    public void setTipo(int tipo) {
         this.tipo = tipo;
     }
 
