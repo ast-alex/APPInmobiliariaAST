@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".ui.inmueble.CrearInmuebleFragment">
+
+    <EditText
+        android:id="@+id/etDireccion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Dirección"
+        android:inputType="text" />
+
+    <EditText
+        android:id="@+id/etUso"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Uso"
+        android:inputType="text" />
+
+    <EditText
+        android:id="@+id/etTipo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Tipo"
+        android:inputType="text" />
+
+    <EditText
+        android:id="@+id/etAmbientes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Cantidad de Ambientes"
+        android:inputType="number" />
+
+    <EditText
+        android:id="@+id/etLatitud"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Latitud"
+        android:inputType="numberDecimal" />
+
+    <EditText
+        android:id="@+id/etLongitud"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Longitud"
+        android:inputType="numberDecimal" />
+
+    <EditText
+        android:id="@+id/etPrecio"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Precio"
+        android:inputType="numberDecimal" />
+
+    <ImageView
+        android:id="@+id/ivFoto"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginTop="16dp"
+        android:scaleType="centerCrop"
+        android:background="#E0E0E0"
+        android:contentDescription="Foto del Inmueble" />
+
+    <Button
+        android:id="@+id/btnSeleccionarFoto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Seleccionar Foto" />
+
+    <Button
+        android:id="@+id/btnCrearInmueble"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Crear Inmueble" />
+
+</LinearLayout>

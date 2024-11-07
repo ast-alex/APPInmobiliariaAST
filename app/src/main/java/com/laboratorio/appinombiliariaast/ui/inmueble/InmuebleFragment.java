@@ -19,6 +19,7 @@ import androidx.navigation.NavHostController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.laboratorio.appinombiliariaast.R;
 import com.laboratorio.appinombiliariaast.databinding.FragmentInmuebleBinding;
 import com.laboratorio.appinombiliariaast.ui.adapters.InmuebleAdapter;
@@ -65,6 +66,15 @@ public class InmuebleFragment extends Fragment {
             public void onChanged(List<Inmueble> inmuebles) {
                 adapter.setInmueblesList(inmuebles);
                 Log.d("InmuebleFragment", "Inmuebles cargados en la UI: " + inmuebles.size());
+            }
+        });
+
+        //btn flotante hacia crear inmueble
+        binding.fabAddInmueble.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavController navController = NavHostFragment.findNavController(InmuebleFragment.this);
+                navController.navigate(R.id.nav_crear_inmueble);
             }
         });
 

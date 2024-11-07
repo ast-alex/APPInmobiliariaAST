@@ -14,6 +14,7 @@ import com.laboratorio.appinombiliariaast.models.ResetPasswordViewModel;
 
 import java.util.List;
 
+import okhttp3.MultipartBody;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -22,6 +23,7 @@ import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
+import retrofit2.http.Multipart;
 import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
@@ -97,6 +99,20 @@ public class ApiClient {
         @Headers({"Content-Type: application/json"})
         @PATCH("Inmueble/disponibilidad/{id}")
         Call<Void> actualizarDisponibilidad(@Path("id") int id, @Body boolean disponibilidad, @Header("Authorization") String token);
+
+        @Multipart
+        @POST("Inmueble/crearInmueble")
+        Call<Inmueble> crearInmueble(
+                @Part("direccion") String direccion,
+                @Part("uso") int uso,
+                @Part("tipo") int tipo,
+                @Part("cantidad_Ambientes") int cantidad_Ambientes,
+                @Part("latitud") double latitud,
+                @Part("longitud") double longitud,
+                @Part("precio") double precio,
+                @Part MultipartBody.Part foto,
+                @Header("Authorization") String token
+        );
     }
 
 
