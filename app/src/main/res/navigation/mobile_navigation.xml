@@ -51,6 +51,10 @@
     <fragment
         android:id="@+id/nav_pago"
         android:name="com.laboratorio.appinombiliariaast.ui.pago.PagoFragment"
-        android:label="PagoFragment" />
+        android:label="Informacion de Pagos" />
+    <fragment
+        android:id="@+id/nav_inquilino"
+        android:name="com.laboratorio.appinombiliariaast.ui.inquilino.InquilinoFragment"
+        android:label="Datos del Inquilino" />
 
 </navigation>
