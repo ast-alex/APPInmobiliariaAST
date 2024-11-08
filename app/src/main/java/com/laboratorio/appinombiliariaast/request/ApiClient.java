@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.laboratorio.appinombiliariaast.models.Contrato;
 import com.laboratorio.appinombiliariaast.models.Inmueble;
 import com.laboratorio.appinombiliariaast.models.InmuebleDetalleViewModel;
 import com.laboratorio.appinombiliariaast.models.Login;
@@ -113,6 +114,9 @@ public class ApiClient {
                 @Part MultipartBody.Part foto,
                 @Header("Authorization") String token
         );
+
+        @GET("Contrato/inmuebles-alquilados")
+        Call<List<Contrato>> getContratos(@Header("Authorization") String token);
     }
 
 

@@ -40,5 +40,9 @@
         android:name="com.laboratorio.appinombiliariaast.ui.inmueble.CrearInmuebleFragment"
         android:label="Agregar Inmueble"
         tools:layout="@layout/fragment_crear_inmueble" />
+    <fragment
+        android:id="@+id/nav_contrato"
+        android:name="com.laboratorio.appinombiliariaast.ui.contrato.ContratoFragment"
+        android:label="Inmuebles Alquilados" />
 
 </navigation>

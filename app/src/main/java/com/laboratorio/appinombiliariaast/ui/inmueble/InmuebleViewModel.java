@@ -26,7 +26,6 @@ public class InmuebleViewModel extends AndroidViewModel {
         super(application);
     }
 
-
     public LiveData<List<Inmueble>> getInmuebles() {
         if (inmuebles == null) {
             inmuebles = new MutableLiveData<>();
