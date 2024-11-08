@@ -52,6 +52,8 @@ public class ContratoAdapter extends RecyclerView.Adapter<ContratoAdapter.Contra
         Contrato contrato = contratosList.get(position);
         holder.tvDireccion.setText(contrato.getInmuebleDireccion());
 
+        Log.d("ContratoAdapter", "Cargando ID: " + contrato.getiD_contrato());
+
         String baseUrl = "http://192.168.1.2:5166";  // Base URL de las fotos en tu servidor
         String fotoPath = contrato.getInmuebleFoto();
         String fotoUrl = baseUrl + fotoPath;
@@ -76,12 +78,6 @@ public class ContratoAdapter extends RecyclerView.Adapter<ContratoAdapter.Contra
                     }
                 })
                 .into(holder.ivInmueble);
-
-        // Configurar clic en "Ver Contrato"
-        holder.tvVer.setOnClickListener(v -> {
-            int contratoId = contrato.getiD_contrato();
-            onItemClickListener.onItemClick(contratoId);
-        });
     }
 
     @Override
@@ -98,6 +94,12 @@ public class ContratoAdapter extends RecyclerView.Adapter<ContratoAdapter.Contra
             tvDireccion = itemView.findViewById(R.id.tvDireccion);
             tvVer = itemView.findViewById(R.id.tvVer);
             ivInmueble = itemView.findViewById(R.id.ivInmueble);
+
+            // Configurar clic en "Ver Contrato"
+            itemView.setOnClickListener(v -> {
+                int contratoId = contratosList.get(getAdapterPosition()).getiD_contrato();
+                onItemClickListener.onItemClick(contratoId);
+            });
         }
     }
 

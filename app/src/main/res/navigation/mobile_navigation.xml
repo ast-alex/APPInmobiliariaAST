@@ -43,6 +43,10 @@
     <fragment
         android:id="@+id/nav_contrato"
         android:name="com.laboratorio.appinombiliariaast.ui.contrato.ContratoFragment"
-        android:label="Inmuebles Alquilados" />
+        android:label="Contratos Vigentes" />
+    <fragment
+        android:id="@+id/detalleContratoFragment"
+        android:name="com.laboratorio.appinombiliariaast.ui.contrato.DetalleContratoFragment"
+        android:label="Informacion del Contrato" />
 
 </navigation>

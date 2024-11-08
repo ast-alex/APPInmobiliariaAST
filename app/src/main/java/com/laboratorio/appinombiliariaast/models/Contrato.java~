@@ -6,11 +6,10 @@ public class Contrato {
     private int iD_inquilino;
     private String inmuebleDireccion;
     private String inmuebleFoto;
-    private String inquilinoNombreCompleto;
     private String fecha_Inicio; ;
     private String fecha_Fin;
     private double monto_Mensual;
-
+    private String inquilinoNombreCompleto;
 
     public Contrato() {
     }

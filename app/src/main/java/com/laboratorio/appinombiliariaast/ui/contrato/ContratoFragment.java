@@ -35,13 +35,17 @@ public class ContratoFragment extends Fragment {
         binding = FragmentContratoBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
+
         // Configurar el Adapter para Contratos y manejar el clic en cada contrato
         adapter = new ContratoAdapter(getContext(), new ContratoAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int contratoId) {
                 // Aquí manejamos el clic, por ejemplo, navegando a la vista de detalle del contrato
+
+
                 Bundle bundle = new Bundle();
                 bundle.putInt("contrato_id", contratoId);
+                Log.d("ContratoFragment", "Contrato ID: " + contratoId);
 
                 NavController navController = NavHostFragment.findNavController(ContratoFragment.this);
                 navController.navigate(R.id.detalleContratoFragment, bundle);
