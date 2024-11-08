@@ -9,6 +9,7 @@ import com.laboratorio.appinombiliariaast.models.Contrato;
 import com.laboratorio.appinombiliariaast.models.Inmueble;
 import com.laboratorio.appinombiliariaast.models.InmuebleDetalleViewModel;
 import com.laboratorio.appinombiliariaast.models.Login;
+import com.laboratorio.appinombiliariaast.models.Pago;
 import com.laboratorio.appinombiliariaast.models.Pass;
 import com.laboratorio.appinombiliariaast.models.Propietario;
 import com.laboratorio.appinombiliariaast.models.ResetPasswordViewModel;
@@ -120,6 +121,9 @@ public class ApiClient {
 
         @GET("Contrato/detalle/{idContrato}")
         Call<Contrato> getContrato(@Path("idContrato") int idContrato, @Header("Authorization") String token);
+
+        @GET("Pago/pagos-contrato/{idContrato}")
+        Call<List<Pago>> getPagos(@Path("idContrato") int idContrato, @Header("Authorization") String token);
     }
 
 

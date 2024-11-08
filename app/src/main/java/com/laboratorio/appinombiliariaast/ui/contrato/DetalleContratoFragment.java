@@ -9,6 +9,9 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,6 +23,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.laboratorio.appinombiliariaast.R;
 import com.laboratorio.appinombiliariaast.databinding.FragmentDetalleContratoBinding;
 import com.laboratorio.appinombiliariaast.models.Contrato;
+import com.laboratorio.appinombiliariaast.ui.inmueble.InmuebleFragment;
 
 public class DetalleContratoFragment extends Fragment {
 
@@ -61,6 +65,16 @@ public class DetalleContratoFragment extends Fragment {
                         .error(R.drawable.ic_launcher_foreground)
                         .diskCacheStrategy(DiskCacheStrategy.ALL)
                         .into(binding.ivFoto);
+            }
+        });
+
+        binding.btnVerPagos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle bundle = new Bundle();
+                bundle.putInt("contrato_id", contratoId);
+                NavController navController = NavHostFragment.findNavController(DetalleContratoFragment.this);
+                navController.navigate(R.id.nav_pago, bundle);
             }
         });
 
