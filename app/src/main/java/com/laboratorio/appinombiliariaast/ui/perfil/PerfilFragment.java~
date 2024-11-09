@@ -75,8 +75,7 @@ public class PerfilFragment extends Fragment {
                         .load(avatarUrl)
                         .placeholder(R.drawable.loading_plc)
                         .error(R.drawable.ic_launcher_foreground)
-                        .diskCacheStrategy(DiskCacheStrategy.NONE)
-                        .skipMemoryCache(true)
+                        .diskCacheStrategy(DiskCacheStrategy.ALL)
                         .listener(new RequestListener<Drawable>() {
                             @Override
                             public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {

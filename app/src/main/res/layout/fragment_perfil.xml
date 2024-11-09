@@ -9,8 +9,8 @@
 
     <ImageView
         android:id="@+id/imgAvatar"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
+        android:layout_width="220dp"
+        android:layout_height="220dp"
         android:src="@drawable/default_avatar"
         android:layout_gravity="center"
         android:layout_marginBottom="16dp"
