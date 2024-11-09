@@ -1,0 +1,13 @@
+package com.laboratorio.appinombiliariaast.models;
+
+public class RestablecerContrasenaRequest {
+    private String token;
+    private String nuevaContrasena;
+
+    public RestablecerContrasenaRequest(String token, String nuevaContrasena) {
+        this.token = token;
+        this.nuevaContrasena = nuevaContrasena;
+    }
+
+
+}

@@ -1,7 +1,5 @@
 package com.laboratorio.appinombiliariaast.models;
 
-import java.util.Date;
-
 public class Propietario {
     private String dni;
     private String nombre;
@@ -10,8 +8,7 @@ public class Propietario {
     private String email;
     private String direccion;
     private String avatar;
-    private String ResetToken;
-    private String ResetTokenExpiry;
+    private String
 
     public Propietario() {
     }

@@ -27,27 +27,12 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         binding = ActivityForgotPasswordBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-
-        binding.btnResetPassword.setOnClickListener(new View.OnClickListener() {
+        binding.btnSolicitarRecuperacion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String nuevaPassword = binding.etNuevaPassword.getText().toString();
-                String confirmarPassword = binding.etConfirmarPassword.getText().toString();
-
-                if(nuevaPassword.equals(confirmarPassword)){
-                    vm.resetPassword(nuevaPassword, confirmarPassword);
-                }else{
-                    Toast.makeText(getApplication(), "Las contraseñas no coinciden", Toast.LENGTH_SHORT).show();
-                }
+                String email = binding.etEmailRecuperacion.getText().toString().trim();
+                vm.solicitarRecuperacion(email);
             }
         });
-
-        Intent intent = getIntent();
-        Uri data = intent.getData();
-        if(data != null && data.getPath().equals("/reset-password")){
-            String email = data.getQueryParameter("email");
-            String token = data.getQueryParameter("token");
-            vm.setEmailToken(email, token);
-        }
     }
 }

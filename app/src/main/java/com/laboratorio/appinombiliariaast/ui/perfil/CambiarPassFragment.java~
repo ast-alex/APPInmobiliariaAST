@@ -28,7 +28,7 @@ public class CambiarPassFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        vm = new ViewModelProvider(this).get(CambiarPassViewModel.class);
+        CambiarPassViewModel vm = new ViewModelProvider(this).get(CambiarPassViewModel.class);
         binding = FragmentCambiarPassBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
@@ -45,6 +45,13 @@ public class CambiarPassFragment extends Fragment {
 
         return root;
 
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        mViewModel = new ViewModelProvider(this).get(CambiarPassViewModel.class);
+        // TODO: Use the ViewModel
     }
 
 }

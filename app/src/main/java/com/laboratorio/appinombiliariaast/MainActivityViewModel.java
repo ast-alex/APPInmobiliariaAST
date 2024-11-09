@@ -1,12 +1,25 @@
 package com.laboratorio.appinombiliariaast;
 
 import android.app.Application;
+import android.content.SharedPreferences;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 
 public class MainActivityViewModel extends AndroidViewModel {
+    private SharedPreferences sp;
     public MainActivityViewModel(@NonNull Application application) {
         super(application);
+        sp = application.getSharedPreferences("usuario", Application.MODE_PRIVATE);
+    }
+
+    public String getUserName(){
+        return sp.getString("user_name", "");
+    }
+    public String getUserEmail(){
+        return sp.getString("user_email", "");
+    }
+    public String getUserAvatarUrl(){
+        return sp.getString("user_avatar_url", "");
     }
 }

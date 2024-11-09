@@ -102,7 +102,7 @@ public class ApiClient {
         Call<ResponseBody> solicitarRecuperacion(@Field("email") String email);
 
         @POST("Propietario/{id}/change-password")
-        Call<ResponseBody> cambiarPassword(@Path("id") int id, @Body RestablecerContrasenaRequest request);
+        Call<ResponseBody> cambiarPassword(@Path("id") int id, @Body RestablecerContrasenaRequest resetPasswordViewModel);
 
         @GET("Inmueble/inmueblespropietario")
         Call<List<Inmueble>> getInmuebles(@Header("Authorization") String token);
