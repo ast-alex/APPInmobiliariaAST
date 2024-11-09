@@ -18,6 +18,7 @@ import com.laboratorio.appinombiliariaast.models.ResetPasswordViewModel;
 import java.util.List;
 
 import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -76,9 +77,18 @@ public class ApiClient {
         @GET("Propietario/perfil")
         Call<Propietario> getMPropietario(@Header("Authorization") String token);
 
-
+        @Multipart
         @PUT("Propietario/modificar")
-        Call<Propietario> modificarPropietario(@Header("Authorization") String token, @Body Propietario propietario);
+        Call<Propietario> modificarPropietario(
+                @Header("Authorization") String token,
+                @Part("dni") RequestBody dni,
+                @Part("nombre") RequestBody nombre,
+                @Part("apellido") RequestBody apellido,
+                @Part("telefono") RequestBody telefono,
+                @Part("email") RequestBody email,
+                @Part("direccion") RequestBody direccion,
+                @Part MultipartBody.Part avatarFile
+        );
 
         @PUT("Propietario/cambiar-password")
         Call<String> cambiarPassword(@Header("Authorization") String token, @Body Pass pass);

@@ -3,6 +3,7 @@ package com.laboratorio.appinombiliariaast.ui.perfil;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -34,14 +36,18 @@ public class PerfilFragment extends Fragment {
 
     private FragmentPerfilBinding binding;
     private PerfilViewModel vm;
+    private ActivityResultLauncher<Intent> arl;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        PerfilViewModel vm = new ViewModelProvider(this).get(PerfilViewModel.class);
+        vm = new ViewModelProvider(this).get(PerfilViewModel.class);
 
         binding = FragmentPerfilBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
+
+        arl = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
+                result -> vm.recibirFoto(result));
 
         // Observa los cambios en el LiveData de Propietario
         vm.getMPropietario().observe(getViewLifecycleOwner(), new Observer<Propietario>() {
@@ -54,6 +60,7 @@ public class PerfilFragment extends Fragment {
                 binding.etTelefono.setText(propietario.getTelefono());
                 binding.etDireccion.setText(propietario.getDireccion());
                 binding.etEmail.setText(propietario.getEmail());
+                binding.btnSubirAvatar.setOnClickListener(view -> abrirGaleria());
 
                 String baseUrl = "http://192.168.1.2:5166";
                 String avatarPath = propietario.getAvatar();
@@ -89,6 +96,10 @@ public class PerfilFragment extends Fragment {
 
             }
         });
+        vm.getUriFoto().observe(getViewLifecycleOwner(), uri -> {
+            binding.imgAvatar.setImageURI(uri);
+        });
+
 
         binding.btnEditar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -116,6 +127,11 @@ public class PerfilFragment extends Fragment {
         vm.obtenerPropietario();
 
         return root;
+    }
+
+    private void abrirGaleria() {
+        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        arl.launch(intent);
     }
 
 

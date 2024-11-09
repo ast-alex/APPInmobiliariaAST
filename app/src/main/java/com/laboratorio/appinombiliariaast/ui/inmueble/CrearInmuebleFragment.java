@@ -97,5 +97,5 @@ public class CrearInmuebleFragment extends Fragment {
     private void abrirGaleria() {
         Intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 arl.launch(Intent);
-        };
-    }
+    };
+}
