@@ -124,6 +124,9 @@ public class ApiClient {
 
         @GET("Pago/pagos-contrato/{idContrato}")
         Call<List<Pago>> getPagos(@Path("idContrato") int idContrato, @Header("Authorization") String token);
+
+        @GET("Inmueble/alquilados")
+        Call<List<Inmueble>> getInmueblesAlquilados(@Header("Authorization") String token);
     }
 
 
