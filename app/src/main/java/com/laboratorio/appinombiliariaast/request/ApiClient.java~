@@ -130,7 +130,7 @@ public class ApiClient {
         Call<List<Inmueble>> getInmueblesAlquilados(@Header("Authorization") String token);
 
         @GET("Inquilino/{inmuebleId}")
-        Call<Inquilino> getInquilino(@Path("inmuebleId") int inmuebleId, @Header("Authorization") String token);
+        Call<Inquilino> 
     }
 
 

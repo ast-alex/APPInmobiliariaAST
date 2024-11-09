@@ -55,6 +55,11 @@
     <fragment
         android:id="@+id/nav_inquilino"
         android:name="com.laboratorio.appinombiliariaast.ui.inquilino.InquilinoFragment"
-        android:label="Datos del Inquilino" />
+        android:label="Inmuebles Alquilados" />
+    <fragment
+        android:id="@+id/detalleInquilinoFragment"
+        android:name="com.laboratorio.appinombiliariaast.ui.inquilino.DetalleInquilinoFragment"
+        android:label="Informacion del Inquilino"
+         />
 
 </navigation>

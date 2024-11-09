@@ -7,7 +7,6 @@
     android:padding="16dp"
     android:gravity="center">
 
-    <!-- Avatar del propietario -->
     <ImageView
         android:id="@+id/imgAvatar"
         android:layout_width="120dp"
@@ -17,8 +16,6 @@
         android:layout_marginBottom="16dp"
         android:contentDescription="Avatar del propietario"/>
 
-
-    <!-- Campo de DNI -->
     <EditText
         android:id="@+id/etDni"
         android:layout_width="match_parent"
@@ -27,7 +24,6 @@
         android:enabled="false"
         android:inputType="number"/>
 
-    <!-- Campo de Nombre -->
     <EditText
         android:id="@+id/etNombre"
         android:layout_width="match_parent"
@@ -36,7 +32,6 @@
         android:enabled="false"
         android:inputType="textPersonName"/>
 
-    <!-- Campo de Apellido -->
     <EditText
         android:id="@+id/etApellido"
         android:layout_width="match_parent"
@@ -45,7 +40,6 @@
         android:enabled="false"
         android:inputType="textPersonName"/>
 
-    <!-- Campo de Teléfono -->
     <EditText
         android:id="@+id/etTelefono"
         android:layout_width="match_parent"
@@ -54,7 +48,6 @@
         android:enabled="false"
         android:inputType="phone"/>
 
-    <!-- Campo de Email -->
     <EditText
         android:id="@+id/etEmail"
         android:layout_width="match_parent"
@@ -64,7 +57,6 @@
         android:inputType="textEmailAddress"/>
 
 
-    <!-- Campo de Dirección -->
     <EditText
         android:id="@+id/etDireccion"
         android:layout_width="match_parent"
@@ -74,7 +66,6 @@
         android:inputType="textPostalAddress"/>
 
 
-    <!-- Botón de Editar -->
     <Button
         android:id="@+id/btnEditar"
         android:layout_width="match_parent"
@@ -82,7 +73,6 @@
         android:text="Editar"
         android:layout_marginTop="16dp"/>
 
-    <!-- Botón de Subir/Modificar Avatar -->
     <Button
         android:id="@+id/btnSubirAvatar"
         android:layout_width="match_parent"

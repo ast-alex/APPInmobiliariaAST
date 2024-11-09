@@ -92,7 +92,8 @@ public class InquilinoAdapter extends RecyclerView.Adapter<InquilinoAdapter.Inqu
 
             //configurar click en "Ver Inquilino
             itemView.setOnClickListener(v -> {
-
+                int inmuebleId = inmuebleList.get(getAdapterPosition()).getiD_inmueble();
+                onItemClickListener.onItemClick(inmuebleId);
             });
         }
     }
