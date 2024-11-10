@@ -30,15 +30,11 @@ public class DetalleInmuebleFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflar el layout usando ViewBinding
         binding = FragmentDetalleInmuebleBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         detalleInmuebleViewModel = new ViewModelProvider(this).get(DetalleInmuebleViewModel.class);
 
-        if(getArguments() != null) {
-            inmuebleId = getArguments().getInt("inmueble_id");
-        }
-
+        inmuebleId = getArguments().getInt("inmueble_id");
         detalleInmuebleViewModel.cargarDetalle(inmuebleId);
 
         // Observar el LiveData desde el ViewModel
@@ -77,9 +73,6 @@ public class DetalleInmuebleFragment extends Fragment {
                         });
                     }
                 });
-
-
-
         return root;
     }
 

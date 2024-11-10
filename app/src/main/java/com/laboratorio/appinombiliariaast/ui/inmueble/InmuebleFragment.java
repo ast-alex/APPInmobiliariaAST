@@ -46,7 +46,6 @@ public class InmuebleFragment extends Fragment {
         adapter = new InmuebleAdapter(getContext(), new InmuebleAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int inmuebleId) {
-                // Aquí manejas el clic, por ejemplo, mostrando el detalle del inmueble
                 DetalleInmuebleFragment detalleFragment = new DetalleInmuebleFragment();
 
                 Bundle bundle = new Bundle();

@@ -21,7 +21,7 @@ public class ChangePasswordViewModel extends AndroidViewModel {
         super(application);
     }
 
-    public void cambiarPassword(int idPropietario, String token, String newPassword){
+    public void cambiarPassword(int idPropietario, String token, String newPassword, final Runnable onSuccess) {
         RestablecerContrasenaRequest request = new RestablecerContrasenaRequest(token, newPassword);
 
 
@@ -31,6 +31,9 @@ public class ChangePasswordViewModel extends AndroidViewModel {
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.isSuccessful()) {
                     Toast.makeText(getApplication(), "Contraseña cambiada con exito", Toast.LENGTH_SHORT).show();
+                    if (onSuccess != null) {
+                        onSuccess.run();
+                    }
                 }else{
                     Toast.makeText(getApplication(), "Error al cambiar la contraseña", Toast.LENGTH_SHORT).show();
                 }

@@ -6,7 +6,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
-import androidx.lifecycle.MutableLiveData;
 
 import com.laboratorio.appinombiliariaast.models.Pass;
 import com.laboratorio.appinombiliariaast.request.ApiClient;
@@ -17,16 +16,8 @@ import retrofit2.Response;
 
 
 public class CambiarPassViewModel extends AndroidViewModel {
-    private MutableLiveData<Boolean> passwordChangeSuccess;
     public CambiarPassViewModel(@NonNull Application application) {
         super(application);
-    }
-
-    public MutableLiveData<Boolean> getPasswordChangeSuccess() {
-        if (passwordChangeSuccess == null) {
-            passwordChangeSuccess = new MutableLiveData<>();
-        }
-        return passwordChangeSuccess;
     }
 
     public void cambiarPassword(String PasswordAcutal, String NuevaPassword, String ConfirmarPassword) {
@@ -56,7 +47,6 @@ public class CambiarPassViewModel extends AndroidViewModel {
                 public void onResponse(Call<String> call, Response<String> response) {
                     if (response.isSuccessful()) {
                         Toast.makeText(getApplication(),  "Contraseña cambiada con exito" + response.body(), Toast.LENGTH_SHORT).show();
-                        passwordChangeSuccess.setValue(true);
                     }else
                     {
                         Toast.makeText(getApplication(), "Error al cambiar la contraseña" + response.code(), Toast.LENGTH_SHORT).show();

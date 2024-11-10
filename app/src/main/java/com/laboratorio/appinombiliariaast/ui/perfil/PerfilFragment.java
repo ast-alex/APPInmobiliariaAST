@@ -54,7 +54,7 @@ public class PerfilFragment extends Fragment {
         arl = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
                 result -> vm.recibirFoto(result));
 
-        // Observa los cambios en el LiveData de Propietario
+        // Observo los cambios en el LiveData de Propietario
         vm.getMPropietario().observe(getViewLifecycleOwner(), new Observer<Propietario>() {
             @Override
             public void onChanged(Propietario propietario) {

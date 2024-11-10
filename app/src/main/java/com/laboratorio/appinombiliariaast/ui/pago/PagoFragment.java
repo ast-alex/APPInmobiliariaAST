@@ -48,8 +48,6 @@ public class PagoFragment extends Fragment {
                 adapter.setPagosList(pagos);
             }
         });
-
-
         return root;
 
     }

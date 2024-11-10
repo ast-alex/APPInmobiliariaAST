@@ -96,6 +96,13 @@ public class PerfilViewModel extends AndroidViewModel {
                         Log.d("PerfilViewModel", "Propietario cargado: " + response.body().getNombre());
 
                         mPropietario.setValue(propietario);
+
+                        //guardar datos del propietario en shared preferences
+                        SharedPreferences.Editor editor = sp.edit();
+                        editor.putString("user_name", propietario.getNombre() + " " + propietario.getApellido());
+                        editor.putString("user_email", propietario.getEmail());
+                        editor.putString("user_avatar_url", propietario.getAvatar());
+                        editor.apply();
                     }else{
                         Log.d("PerfilViewModel", "Error al obtener propietario: " + response.code());
                     }
@@ -170,6 +177,7 @@ public class PerfilViewModel extends AndroidViewModel {
                     if (response.isSuccessful() && response.body() != null) {
                         Propietario pActualizado = response.body();
                         Log.d("PerfilViewModel", "Propietario actualizado: " + pActualizado.getNombre());
+
                         mPropietario.setValue(pActualizado);
                         obtenerPropietario();
                     } else {

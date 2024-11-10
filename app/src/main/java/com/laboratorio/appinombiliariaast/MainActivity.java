@@ -5,8 +5,11 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Menu;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
@@ -33,24 +36,37 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        View hv = navigationView.getHeaderView(0);
 
-        //TextView userNameTextView = findViewById(R.id.)
+        TextView userNameTextView = hv.findViewById(R.id.textViewName);
+        TextView userEmailTextView = hv.findViewById(R.id.textViewEmail);
+        ImageView userImageView = hv.findViewById(R.id.imageView);
+
+        String userName = vm.getUserName();
+        String userEmail = vm.getUserEmail();
+        String userImage = vm.getUserAvatarUrl();
+
+        userNameTextView.setText(userName);
+        userEmailTextView.setText(userEmail);
+
+        String baseUrl = "http://192.168.1.2:5166";
+        String avatarPath = vm.getUserAvatarUrl();
+        String avatarUrl = baseUrl + avatarPath;
+        Glide.with(this)
+                .load(avatarUrl)
+                .placeholder(R.drawable.loading_plc)
+                .error(R.drawable.ic_launcher_foreground)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(userImageView);
 
         setSupportActionBar(binding.appBarMain.toolbar);
-//        binding.appBarMain.fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null)
-//
-//            }
-//        });
         DrawerLayout drawer = binding.drawerLayout;
-        NavigationView navigationView = binding.navView;
+
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.map, R.id.nav_perfil, R.id.nav_cambiarpass,R.id.nav_inmueble,R.id.nav_slideshow, R.id.nav_contrato, R.id.nav_inquilino)
+                R.id.map, R.id.nav_perfil, R.id.nav_inmueble,R.id.nav_slideshow, R.id.nav_contrato, R.id.nav_inquilino)
                 .setOpenableLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);

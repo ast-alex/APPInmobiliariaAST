@@ -43,7 +43,6 @@ public class InquilinoFragment extends Fragment {
         adapter = new InquilinoAdapter(getContext(), new InquilinoAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int inmuebleId) {
-                // Aquí manejas el clic, por ejemplo, mostrando el detalle del inquilino
                 DetalleInquilinoFragment detalleInquilinoFragment = new DetalleInquilinoFragment();
 
                 Bundle bundle = new Bundle();

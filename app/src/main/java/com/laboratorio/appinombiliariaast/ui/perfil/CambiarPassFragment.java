@@ -1,5 +1,6 @@
 package com.laboratorio.appinombiliariaast.ui.perfil;
 
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
@@ -7,6 +8,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,9 +43,20 @@ public class CambiarPassFragment extends Fragment {
                 String ConfirmarPassword = binding.etConfirmarPassword.getText().toString();
 
                 vm.cambiarPassword(PasswordActual, NuevaPassword, ConfirmarPassword);
+
+                binding.etPasswordActual.setText("");
+                binding.etNuevaPassword.setText("");
+                binding.etConfirmarPassword.setText("");
             }
         });
 
+        vm.getPasswordChangeSuccess().observe(getViewLifecycleOwner(), new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+                NavController navController = NavHostFragment.findNavController(CambiarPassFragment.this);
+                navController.navigate(R.id.nav_perfil);
+            }
+        });
         return root;
 
     }

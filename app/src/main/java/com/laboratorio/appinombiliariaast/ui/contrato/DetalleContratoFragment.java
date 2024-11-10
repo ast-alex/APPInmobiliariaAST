@@ -39,13 +39,9 @@ public class DetalleContratoFragment extends Fragment {
         View root = binding.getRoot();
         vm = new ViewModelProvider(this).get(DetalleContratoViewModel.class);
 
-        if (getArguments() != null) {
-            contratoId = getArguments().getInt("contrato_id");
-        }
+        contratoId = getArguments().getInt("contrato_id");
         Log.d("DetalleContratoFragment", "Contrato ID: " + contratoId);
         vm.cargarDetalle(contratoId);
-
-
 
         vm.getContratoDetalle().observe(getViewLifecycleOwner(), new Observer<Contrato>() {
             @SuppressLint("SetTextI18n")

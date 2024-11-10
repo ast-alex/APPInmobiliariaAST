@@ -13,10 +13,6 @@
             android:icon="@drawable/ic_my_profile"
             android:title="Mi Perfil" />
         <item
-            android:id="@+id/nav_cambiarpass"
-            android:icon="@drawable/ic_password"
-            android:title="Cambiar Password" />
-        <item
             android:id="@+id/nav_inquilino"
             android:icon="@drawable/ic_inquilino"
             android:title="Inquilino" />
@@ -29,7 +25,5 @@
             android:id="@+id/nav_contrato"
             android:icon="@drawable/ic_contrato"
             android:title="Contratos" />
-
-
     </group>
 </menu>
