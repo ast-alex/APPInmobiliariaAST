@@ -61,5 +61,10 @@
         android:name="com.laboratorio.appinombiliariaast.ui.inquilino.DetalleInquilinoFragment"
         android:label="Informacion del Inquilino"
          />
+    <fragment
+        android:id="@+id/nav_logout"
+        android:name="com.laboratorio.appinombiliariaast.ui.leave.LeaveFragment"
+        android:label="Logout"
+        tools:layout="@layout/fragment_leave" />
 
 </navigation>

@@ -10,7 +10,8 @@ public class MainActivityViewModel extends AndroidViewModel {
     private SharedPreferences sp;
     public MainActivityViewModel(@NonNull Application application) {
         super(application);
-        sp = application.getSharedPreferences("usuario", Application.MODE_PRIVATE);
+        sp = application.getSharedPreferences("usuario", 0);
+
     }
 
     public String getUserName(){

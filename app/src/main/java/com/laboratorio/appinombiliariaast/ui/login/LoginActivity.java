@@ -1,6 +1,13 @@
 package com.laboratorio.appinombiliariaast.ui.login;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -18,9 +25,14 @@ import com.laboratorio.appinombiliariaast.R;
 import com.laboratorio.appinombiliariaast.databinding.ActivityLoginBinding;
 import com.laboratorio.appinombiliariaast.ui.forgotpassword.ForgotPasswordActivity;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity implements SensorEventListener {
     private ActivityLoginBinding binding;
     private LoginViewModel vm;
+    private SensorManager sensorManager;
+    private Sensor accelerometer;
+    private long lastUpdate;
+    private float lastX, lastY, lastZ;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +54,55 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        solicitarPermisos();
+
+        sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
+        accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        sensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
+    }
+    private void solicitarPermisos() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M &&
+                checkSelfPermission(android.Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(new String[]{Manifest.permission.CALL_PHONE}, 1000);
+        }
+    }
+
+    @Override
+    public void onSensorChanged(SensorEvent event) {
+        if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
+            long currentTime = System.currentTimeMillis();
+            if ((currentTime - lastUpdate) > 100) {
+                long diffTime = currentTime - lastUpdate;
+                lastUpdate = currentTime;
+
+                float x = event.values[0];
+                float y = event.values[1];
+                float z = event.values[2];
+
+                float speed = Math.abs(x + y + z - lastX - lastY - lastZ) / diffTime * 10000;
+                if (speed > 2000) {
+                    // Se detectó un agite fuerte y ahora realizamos la llamada telefónica
+                    vm.makePhoneCall("266422222");  // Número telefónico para llamar
+                }
+
+                lastX = x;
+                lastY = y;
+                lastZ = z;
+            }
+        }
+    }
+
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int i) {
+
+    }
+
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        sensorManager.unregisterListener(this);
     }
 }
 

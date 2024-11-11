@@ -14,6 +14,7 @@ public class Inmueble {
     private int iD_propietario;
     private Propietario propietario;
     private String foto;
+    
 
     public Inmueble() {
     }
