@@ -9,6 +9,7 @@ import com.laboratorio.appinombiliariaast.models.Contrato;
 import com.laboratorio.appinombiliariaast.models.Inmueble;
 import com.laboratorio.appinombiliariaast.models.InmuebleDetalleViewModel;
 import com.laboratorio.appinombiliariaast.models.Inquilino;
+import com.laboratorio.appinombiliariaast.models.InquilinoResponse;
 import com.laboratorio.appinombiliariaast.models.Login;
 import com.laboratorio.appinombiliariaast.models.Pago;
 import com.laboratorio.appinombiliariaast.models.Pass;
@@ -141,7 +142,7 @@ public class ApiClient {
         Call<List<Inmueble>> getInmueblesAlquilados(@Header("Authorization") String token);
 
         @GET("Inquilino/{inmuebleId}")
-        Call<Inquilino> getInquilino(@Path("inmuebleId") int inmuebleId, @Header("Authorization") String token);
+        Call<InquilinoResponse> getInquilino(@Path("inmuebleId") int inmuebleId, @Header("Authorization") String token);
     }
 
 

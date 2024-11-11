@@ -10,6 +10,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
 import com.laboratorio.appinombiliariaast.models.Inquilino;
+import com.laboratorio.appinombiliariaast.models.InquilinoResponse;
 import com.laboratorio.appinombiliariaast.request.ApiClient;
 
 import retrofit2.Call;
@@ -37,21 +38,22 @@ public class DetalleInquilinoViewModel extends AndroidViewModel {
 
         if(token != null) {
             ApiClient.InmobiliariaService api = ApiClient.getInmobiliariaService();
-            Call<Inquilino> pcall = api.getInquilino(iD_inquilino, "Bearer " + token);
+            Call<InquilinoResponse> pcall = api.getInquilino(iD_inquilino, "Bearer " + token);
 
-            pcall.enqueue(new Callback<Inquilino>() {
+            pcall.enqueue(new Callback<InquilinoResponse>() {
                 @Override
-                public void onResponse(Call<Inquilino> call, Response<Inquilino> response) {
+                public void onResponse(Call<InquilinoResponse> call, Response<InquilinoResponse> response) {
                     if(response.isSuccessful() && response.body() != null) {
-                        inquilinoDetalle.postValue(response.body());
-                        Log.d("InquilinoViewModel", "Inquilino cargado: " + response.body().getNombre());
+                        Inquilino inquilino = response.body().getInquilino();
+                        inquilinoDetalle.postValue(inquilino);
+                        Log.d("InquilinoViewModel", "Inquilino cargado: " + inquilino.getNombre());
                     }else {
                         Log.d("DetalleInquilinoViewModel", "Error en la respuesta: " + response.code());
                     }
                 }
 
                 @Override
-                public void onFailure(Call<Inquilino> call, Throwable throwable) {
+                public void onFailure(Call<InquilinoResponse> call, Throwable throwable) {
                     Toast.makeText(getApplication(), " Error en el server", Toast.LENGTH_SHORT).show();
                 }
             });
