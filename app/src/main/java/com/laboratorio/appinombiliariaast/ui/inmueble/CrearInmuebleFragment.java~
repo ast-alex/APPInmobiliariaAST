@@ -64,7 +64,6 @@ public class CrearInmuebleFragment extends Fragment {
                     binding.etLongitud.setText("");
                     binding.etPrecio.setText("");
                     binding.ivFoto.setImageURI(null);
-                    vm.getUriFoto().setValue(null);
                 }
             }
         });

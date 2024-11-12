@@ -59,8 +59,8 @@ public class CrearInmuebleViewModel extends AndroidViewModel {
 
     public MultipartBody.Part convertUriToFile(Uri uri, Context context) {
         try {
-            InputStream inputStream = getActivity().getContentResolver().openInputStream(uri);
-            File file = new File(getActivity().getCacheDir(), "image.png");
+            InputStream inputStream = context.getContentResolver().openInputStream(uri);
+            File file = new File(context.getCacheDir(), "image.png");
             OutputStream outputStream = new FileOutputStream(file);
 
             // Copiar los datos de la URI al archivo
@@ -117,8 +117,12 @@ public class CrearInmuebleViewModel extends AndroidViewModel {
             double longitudDouble = Double.parseDouble(longitud);
             double precioDouble = Double.parseDouble(precio);
 
-            // Preparar la imagen si está disponible
-            MultipartBody.Part fotoPart = convertUriToFile(uri, getActivity());
+
+            MultipartBody.Part fotoPart = convertUriToFile(uri, context);
+            if (fotoPart == null) {
+                msj.setValue("Error al obtener la imagen.");
+                return;
+            }
 
             // Obtener token del usuario
             SharedPreferences sp = getApplication().getSharedPreferences("usuario", 0);
@@ -133,8 +137,8 @@ public class CrearInmuebleViewModel extends AndroidViewModel {
                     @Override
                     public void onResponse(Call<Inmueble> call, Response<Inmueble> response) {
                         if (response.isSuccessful() && response.body() != null) {
-                            Inmueble inmueble = response.body();
                             msj.setValue("Inmueble creado con éxito");
+                            uriFoto.setValue(null);
                         } else {
                             msj.setValue("Error al crear el inmueble: " + response.errorBody().toString());
                             Log.d("CrearInmuebleViewModel", "Error en la respuesta: " + response.code());
