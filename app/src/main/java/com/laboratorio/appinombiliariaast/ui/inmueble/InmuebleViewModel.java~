@@ -21,7 +21,6 @@ import retrofit2.Response;
 public class InmuebleViewModel extends AndroidViewModel {
     private MutableLiveData<List<Inmueble>> inmuebles;
 
-
     public InmuebleViewModel(@NonNull Application application) {
         super(application);
     }
@@ -31,9 +30,9 @@ public class InmuebleViewModel extends AndroidViewModel {
             inmuebles = new MutableLiveData<>();
             cargarInmuebles();
         }
-
         return inmuebles;
     }
+
 
     private void cargarInmuebles() {
         SharedPreferences sp = getApplication().getSharedPreferences("usuario", 0);

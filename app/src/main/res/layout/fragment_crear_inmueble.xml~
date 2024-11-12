@@ -18,14 +18,14 @@
         android:id="@+id/etUso"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Uso: 0-Comercial, 1-Residencial"
+        android:hint="Uso"
         android:inputType="text" />
 
     <EditText
         android:id="@+id/etTipo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Tipo: 0-Local, 1-Deposito, 2-Casa, 3-Departamento, 4-Otro"
+        android:hint="Tipo"
         android:inputType="text" />
 
     <EditText

@@ -23,6 +23,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.List;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -34,9 +35,11 @@ import retrofit2.Response;
 public class CrearInmuebleViewModel extends AndroidViewModel {
     private MutableLiveData<Uri> uriFoto;
     private MutableLiveData<String> msj;
+    private Context context;
 
     public CrearInmuebleViewModel(@NonNull Application application) {
         super(application);
+        this.context = application.getApplicationContext();
     }
 
     public MutableLiveData<Uri> getUriFoto() {
@@ -53,6 +56,7 @@ public class CrearInmuebleViewModel extends AndroidViewModel {
         return msj;
 
     }
+
     public MultipartBody.Part convertUriToFile(Uri uri, Context context) {
         try {
             InputStream inputStream = getActivity().getContentResolver().openInputStream(uri);
@@ -90,16 +94,22 @@ public class CrearInmuebleViewModel extends AndroidViewModel {
     }
 
     public void crearInmueble(String direccion, String uso, String tipo, String cantidad_Ambientes, String latitud, String longitud, String precio){
-        Uri uri = uriFoto.getValue();
-        MultipartBody.Part fotoPart = null;
-        if(uri != null){
-            fotoPart = convertUriToFile(uri, getActivity());
+        // Validación de campos vacíos
+        if (direccion.isEmpty() || uso.isEmpty() || tipo.isEmpty() || cantidad_Ambientes.isEmpty() ||
+                latitud.isEmpty() || longitud.isEmpty() || precio.isEmpty()) {
+            msj.setValue("Todos los campos son obligatorios.");
+            return;
         }
 
-        SharedPreferences sp = getApplication().getSharedPreferences("usuario", 0);
-        String token = sp.getString("token", null);
+        //validacion foto
+        Uri uri = uriFoto.getValue();
+        if (uri == null) {
+            msj.setValue("La foto es obligatoria.");
+            return;
+        }
 
-        if(token != null){
+        try {
+            // Si los campos no están vacíos, se puede proceder a convertir los valores
             int usoInt = Integer.parseInt(uso);
             int tipoInt = Integer.parseInt(tipo);
             int cantidad_AmbientesInt = Integer.parseInt(cantidad_Ambientes);
@@ -107,30 +117,42 @@ public class CrearInmuebleViewModel extends AndroidViewModel {
             double longitudDouble = Double.parseDouble(longitud);
             double precioDouble = Double.parseDouble(precio);
 
-            ApiClient.InmobiliariaService api = ApiClient.getInmobiliariaService();
-            Call<Inmueble> pcall = api.crearInmueble(direccion, usoInt, tipoInt, cantidad_AmbientesInt, latitudDouble, longitudDouble, precioDouble, fotoPart, "Bearer " + token);
+            // Preparar la imagen si está disponible
+            MultipartBody.Part fotoPart = convertUriToFile(uri, getActivity());
 
-            pcall.enqueue(new Callback<Inmueble>() {
-                @Override
-                public void onResponse(Call<Inmueble> call, Response<Inmueble> response) {
-                    if (response.isSuccessful() && response.body() != null) {
-                        Inmueble inmueble = response.body();
-                        Toast.makeText(getApplication(), "Inmueble creado con exito", Toast.LENGTH_SHORT).show();
-                    } else {
-                        String msj = response.errorBody().toString();
-                        Log.d("CrearInmuebleViewModel", "Error en la respuesta: " + response.code());
-                        Log.d("CrearInmuebleViewModel", "Cuerpo de la respuesta: " + response.errorBody());
+            // Obtener token del usuario
+            SharedPreferences sp = getApplication().getSharedPreferences("usuario", 0);
+            String token = sp.getString("token", null);
+
+            if (token != null) {
+                // Llamar a la API para crear el inmueble
+                ApiClient.InmobiliariaService api = ApiClient.getInmobiliariaService();
+                Call<Inmueble> pcall = api.crearInmueble(direccion, usoInt, tipoInt, cantidad_AmbientesInt, latitudDouble, longitudDouble, precioDouble, fotoPart, "Bearer " + token);
+
+                pcall.enqueue(new Callback<Inmueble>() {
+                    @Override
+                    public void onResponse(Call<Inmueble> call, Response<Inmueble> response) {
+                        if (response.isSuccessful() && response.body() != null) {
+                            Inmueble inmueble = response.body();
+                            msj.setValue("Inmueble creado con éxito");
+                        } else {
+                            msj.setValue("Error al crear el inmueble: " + response.errorBody().toString());
+                            Log.d("CrearInmuebleViewModel", "Error en la respuesta: " + response.code());
+                        }
                     }
-                }
 
-                @Override
-                public void onFailure(Call<Inmueble> call, Throwable throwable) {
-                    Log.d("CrearInmuebleViewModel", "Error en la peticion: " + throwable.getMessage());
-                    Toast.makeText(getApplication(), " Error en el server", Toast.LENGTH_SHORT).show();
-                }
-
-            });
-
+                    @Override
+                    public void onFailure(Call<Inmueble> call, Throwable throwable) {
+                        msj.setValue("Error en el servidor: " + throwable.getMessage());
+                        Log.d("CrearInmuebleViewModel", "Error en la petición: " + throwable.getMessage());
+                    }
+                });
+            } else {
+                msj.setValue("Token no disponible. Por favor, inicie sesión.");
+            }
+        } catch (NumberFormatException e) {
+            msj.setValue("Por favor, ingrese valores válidos para los campos numéricos.");
         }
     }
+
 }

@@ -21,7 +21,6 @@ import retrofit2.Response;
 public class InmuebleViewModel extends AndroidViewModel {
     private MutableLiveData<List<Inmueble>> inmuebles;
 
-
     public InmuebleViewModel(@NonNull Application application) {
         super(application);
     }
@@ -42,7 +41,6 @@ public class InmuebleViewModel extends AndroidViewModel {
         if (token != null) {
         ApiClient.InmobiliariaService api = ApiClient.getInmobiliariaService();
         Call<List<Inmueble>> pcall = api.getInmuebles("Bearer " + token);
-
 
             pcall.enqueue(new Callback<List<Inmueble>>() {
                 @Override

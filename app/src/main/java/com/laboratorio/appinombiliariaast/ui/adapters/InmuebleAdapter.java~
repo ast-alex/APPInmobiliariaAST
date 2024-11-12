@@ -89,7 +89,7 @@ public class InmuebleAdapter extends RecyclerView.Adapter<InmuebleAdapter.Inmueb
 
     @Override
     public int getItemCount() {
-        return inmueblesList.size();
+        return (inmueblesList != null) ? inmueblesList.size() : 0;
     }
 
     public class InmuebleViewHolder extends RecyclerView.ViewHolder {

@@ -54,6 +54,17 @@ public class CrearInmuebleFragment extends Fragment {
             @Override
             public void onChanged(String s) {
                 Toast.makeText(getContext(), s, Toast.LENGTH_SHORT).show();
+                if (s.equals("Inmueble creado con éxito")) {
+                    // Solo vaciar los campos si la creación fue exitosa
+                    binding.etDireccion.setText("");
+                    binding.etUso.setText("");
+                    binding.etTipo.setText("");
+                    binding.etAmbientes.setText("");
+                    binding.etLatitud.setText("");
+                    binding.etLongitud.setText("");
+                    binding.etPrecio.setText("");
+                    binding.ivFoto.setImageURI(null);
+                }
             }
         });
 
@@ -84,14 +95,6 @@ public class CrearInmuebleFragment extends Fragment {
 
         vm.crearInmueble(direccion, uso, tipo, cantidadAmbientes, latitud, longitud, precio);
 
-        binding.etDireccion.setText("");
-        binding.etUso.setText("");
-        binding.etTipo.setText("");
-        binding.etAmbientes.setText("");
-        binding.etLatitud.setText("");
-        binding.etLongitud.setText("");
-        binding.etPrecio.setText("");
-        binding.ivFoto.setImageURI(null);
     }
 
     private void abrirGaleria() {
