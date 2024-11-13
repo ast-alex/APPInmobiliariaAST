@@ -43,30 +43,34 @@ public class InmuebleFragment extends Fragment {
         View root = binding.getRoot();
 
         // Crear el Adapter y pasar el listener
-        adapter = new InmuebleAdapter(getContext(), new InmuebleAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(int inmuebleId) {
-                DetalleInmuebleFragment detalleFragment = new DetalleInmuebleFragment();
 
-                Bundle bundle = new Bundle();
-                bundle.putInt("inmueble_id", inmuebleId);
-                detalleFragment.setArguments(bundle);
-
-                NavController navController = NavHostFragment.findNavController(InmuebleFragment.this);
-                navController.navigate(R.id.detalleFragment, bundle);
-            }
-        });
-        binding.rvInmuebles.setLayoutManager(new LinearLayoutManager(getContext()));
-        binding.rvInmuebles.setAdapter(adapter);
+//        binding.rvInmuebles.setLayoutManager(new LinearLayoutManager(getContext()));
+//        binding.rvInmuebles.setAdapter(adapter);
 
         // Observa los cambios en la lista de inmuebles
         vm.getInmuebles().observe(getViewLifecycleOwner(), new Observer<List<Inmueble>>() {
             @Override
             public void onChanged(List<Inmueble> inmuebles) {
+                adapter = new InmuebleAdapter(getContext(), new InmuebleAdapter.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(int inmuebleId) {
+                        DetalleInmuebleFragment detalleFragment = new DetalleInmuebleFragment();
+
+                        Bundle bundle = new Bundle();
+                        bundle.putInt("inmueble_id", inmuebleId);
+                        detalleFragment.setArguments(bundle);
+
+                        NavController navController = NavHostFragment.findNavController(InmuebleFragment.this);
+                        navController.navigate(R.id.detalleFragment, bundle);
+                    }
+                });
                 adapter.setInmueblesList(inmuebles);
+                binding.rvInmuebles.setLayoutManager(new LinearLayoutManager(getContext()));
+                binding.rvInmuebles.setAdapter(adapter);
                 Log.d("InmuebleFragment", "Inmuebles cargados en la UI: " + inmuebles.size());
             }
         });
+        vm.cargarInmuebles();
 
         //btn flotante hacia crear inmueble
         binding.fabAddInmueble.setOnClickListener(new View.OnClickListener() {

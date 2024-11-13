@@ -28,12 +28,12 @@ public class InmuebleViewModel extends AndroidViewModel {
     public LiveData<List<Inmueble>> getInmuebles() {
         if (inmuebles == null) {
             inmuebles = new MutableLiveData<>();
-            cargarInmuebles();
+
         }
         return inmuebles;
     }
 
-    private void cargarInmuebles() {
+    public void cargarInmuebles() {
         SharedPreferences sp = getApplication().getSharedPreferences("usuario", 0);
         String token = sp.getString("token", null);
         Log.d("InmuebleViewModel", "Token obtenido: " + token);
